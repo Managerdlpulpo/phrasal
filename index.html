@@ -179,9 +179,14 @@
                     <button onclick="prevPracticeQuestion()" id="btn-practice-prev" class="px-4 py-2 text-sm font-semibold text-slate-600 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition">
                         <i class="fa-solid fa-arrow-left mr-1.5"></i> Anterior
                     </button>
-                    <button onclick="nextPracticeQuestion()" id="btn-practice-next" class="px-5 py-2 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition shadow-md shadow-indigo-200 flex items-center gap-1.5">
-                        <span>Siguiente</span> <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <button onclick="resetPractice()" title="Reiniciar Práctica con mezcla aleatoria" class="px-3 py-2 text-sm font-semibold text-slate-600 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-rotate-right text-indigo-600"></i> <span class="hidden sm:inline">Reiniciar</span>
+                        </button>
+                        <button onclick="nextPracticeQuestion()" id="btn-practice-next" class="px-5 py-2 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition shadow-md shadow-indigo-200 flex items-center gap-1.5">
+                            <span>Siguiente</span> <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -647,11 +652,46 @@
         ];
 
         // ================= STATE MANAGEMENT =================
+        let activePracticeQuestions = [];
+        let activeTestQuestions = [];
+
         let currentPracticeIndex = 0;
-        let practiceAnswers = new Array(practiceQuestions.length).fill(null);
+        let practiceAnswers = [];
         
         let currentTestIndex = 0;
-        let testAnswers = new Array(testQuestions.length).fill(null);
+        let testAnswers = [];
+
+        // Algoritmo Fisher-Yates para barajar las opciones A, B, C y D en cada intento
+        function prepareShuffledQuestions(questionsList) {
+            return questionsList.map(q => {
+                const targetCorrectIndex = q.correctIndex !== undefined ? q.correctIndex : q.correct;
+                const correctText = q.options[targetCorrectIndex];
+                
+                // Copia y mezcla aleatoria de las opciones (A, B, C, D)
+                const shuffledOptions = [...q.options];
+                for (let i = shuffledOptions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+                }
+                
+                // Recalcular con precisión la nueva posición correcta de la opción elegida
+                const newCorrectIndex = shuffledOptions.indexOf(correctText);
+                return {
+                    ...q,
+                    options: shuffledOptions,
+                    correct: newCorrectIndex,
+                    correctIndex: newCorrectIndex
+                };
+            });
+        }
+
+        // Reinicia la práctica regenerando una nueva mezcla aleatoria de opciones
+        function resetPractice() {
+            activePracticeQuestions = prepareShuffledQuestions(practiceQuestions);
+            currentPracticeIndex = 0;
+            practiceAnswers = new Array(activePracticeQuestions.length).fill(null);
+            loadPracticeQuestion();
+        }
 
         // Speech Synthesis Helper
         function speakText(text) {
@@ -770,9 +810,10 @@
 
         // ================= PRACTICE LOGIC =================
         function loadPracticeQuestion() {
-            const q = practiceQuestions[currentPracticeIndex];
-            document.getElementById('practice-progress-text').innerText = `${currentPracticeIndex + 1} / ${practiceQuestions.length}`;
-            document.getElementById('practice-progress-bar').style.width = `${((currentPracticeIndex + 1) / practiceQuestions.length) * 100}%`;
+            if (!activePracticeQuestions.length) return;
+            const q = activePracticeQuestions[currentPracticeIndex];
+            document.getElementById('practice-progress-text').innerText = `${currentPracticeIndex + 1} / ${activePracticeQuestions.length}`;
+            document.getElementById('practice-progress-bar').style.width = `${((currentPracticeIndex + 1) / activePracticeQuestions.length) * 100}%`;
             
             document.getElementById('practice-question').innerText = q.question;
             document.getElementById('practice-context-hint').innerHTML = `<i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> <strong>Pista de contexto:</strong> ${q.hint}`;
@@ -829,7 +870,7 @@
             // Buttons state
             document.getElementById('btn-practice-prev').disabled = currentPracticeIndex === 0;
             const nextBtn = document.getElementById('btn-practice-next');
-            if (currentPracticeIndex === practiceQuestions.length - 1) {
+            if (currentPracticeIndex === activePracticeQuestions.length - 1) {
                 nextBtn.innerHTML = `<span>Finalizar Práctica</span> <i class="fa-solid fa-check"></i>`;
             } else {
                 nextBtn.innerHTML = `<span>Siguiente</span> <i class="fa-solid fa-arrow-right"></i>`;
@@ -849,19 +890,21 @@
         }
 
         function nextPracticeQuestion() {
-            if (currentPracticeIndex < practiceQuestions.length - 1) {
+            if (currentPracticeIndex < activePracticeQuestions.length - 1) {
                 currentPracticeIndex++;
                 loadPracticeQuestion();
             } else {
-                // Practice finished, redirect or show message
+                // Practice finished, redirect to test
                 switchTab('test');
             }
         }
 
         // ================= TEST EVALUATION LOGIC =================
         function startExam() {
+            // Se ejecuta la mezcla aleatoria Fisher-Yates de las 4 opciones para CADA pregunta del examen
+            activeTestQuestions = prepareShuffledQuestions(testQuestions);
             currentTestIndex = 0;
-            testAnswers = new Array(testQuestions.length).fill(null);
+            testAnswers = new Array(activeTestQuestions.length).fill(null);
             
             document.getElementById('test-intro-screen').classList.add('hidden');
             document.getElementById('test-results-screen').classList.add('hidden');
@@ -871,8 +914,8 @@
         }
 
         function loadTestQuestion() {
-            const q = testQuestions[currentTestIndex];
-            document.getElementById('test-question-counter').innerText = `Pregunta ${currentTestIndex + 1} de ${testQuestions.length}`;
+            const q = activeTestQuestions[currentTestIndex];
+            document.getElementById('test-question-counter').innerText = `Pregunta ${currentTestIndex + 1} de ${activeTestQuestions.length}`;
             
             document.getElementById('test-question-text').innerHTML = `
                 <span class="block text-xs font-bold text-slate-500 uppercase mb-1">Escenario Contextual:</span>
@@ -911,7 +954,7 @@
 
             document.getElementById('btn-test-prev').disabled = currentTestIndex === 0;
             const nextBtn = document.getElementById('btn-test-next');
-            if (currentTestIndex === testQuestions.length - 1) {
+            if (currentTestIndex === activeTestQuestions.length - 1) {
                 nextBtn.innerHTML = `Entregar Examen <i class="fa-solid fa-paper-plane ml-1"></i>`;
                 nextBtn.className = "px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition shadow-md shadow-emerald-200";
             } else {
@@ -929,14 +972,13 @@
 
         function nextTestQuestion() {
             if (testAnswers[currentTestIndex] === null) {
-                // User hasn't selected an answer, alert gracefully with UI
                 const optsBox = document.getElementById('test-options');
                 optsBox.classList.add('animate-pulse');
                 setTimeout(() => optsBox.classList.remove('animate-pulse'), 1000);
                 return;
             }
 
-            if (currentTestIndex < testQuestions.length - 1) {
+            if (currentTestIndex < activeTestQuestions.length - 1) {
                 currentTestIndex++;
                 loadTestQuestion();
             } else {
@@ -954,7 +996,7 @@
 
             let wrongVerbs = [];
 
-            testQuestions.forEach((q, idx) => {
+            activeTestQuestions.forEach((q, idx) => {
                 const userAns = testAnswers[idx];
                 const isCorrect = userAns === q.correctIndex;
                 if (isCorrect) score++;
@@ -981,7 +1023,7 @@
                 breakdownContainer.innerHTML += itemHTML;
             });
 
-            const percentage = Math.round((score / testQuestions.length) * 100);
+            const percentage = Math.round((score / activeTestQuestions.length) * 100);
             document.getElementById('score-ring').innerText = `${percentage}%`;
 
             const headline = document.getElementById('results-headline');
@@ -1041,8 +1083,8 @@
 
         // Initialize App
         window.onload = function() {
+            resetPractice();
             renderFlashcards();
-            loadPracticeQuestion();
         };
     </script>
 </body>
