@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phrasal Verbs Master: A Company Boss at 16</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Custom Card Flip Effect */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .flipped {
+            transform: rotateY(180deg);
+        }
+        /* Highlight pulses */
+        @keyframes pulse-light {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-light {
+            animation: pulse-light 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="bg-indigo-900 text-white shadow-xl sticky top-0 z-40 border-b border-indigo-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-500/30 flex items-center justify-center border border-indigo-400/30 text-indigo-300 shadow-inner">
+                        <i class="fa-solid fa-rocket text-xl text-amber-400"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-indigo-100 to-amber-200 bg-clip-text text-transparent">
+                            Phrasal Verbs Master
+                        </h1>
+                        <p class="text-xs text-indigo-200 font-medium">Basado en la lectura: <span class="italic text-amber-300">"A Company Boss at 16"</span></p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="flex space-x-1 sm:space-x-2 bg-indigo-950/60 p-1.5 rounded-xl border border-indigo-700/50 text-xs sm:text-sm font-semibold overflow-x-auto">
+                    <button onclick="switchTab('study')" id="tab-study" class="tab-btn active px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-layer-group"></i> <span>1. Tarjetas</span>
+                    </button>
+                    <button onclick="switchTab('practice')" id="tab-practice" class="tab-btn px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-pen-ruler"></i> <span>2. Práctica</span>
+                    </button>
+                    <button onclick="switchTab('test')" id="tab-test" class="tab-btn px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-graduation-cap"></i> <span>3. Evaluación</span>
+                    </button>
+                    <button onclick="switchTab('reader')" id="tab-reader" class="tab-btn px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-book-open"></i> <span>4. Texto Original</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ==================== TAB 1: TARJETAS DE ESTUDIO ==================== -->
+        <section id="section-study" class="tab-content space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-address-card text-indigo-600"></i> Tarjetas Interactivas de Estudio
+                    </h2>
+                    <p class="text-sm text-slate-600 mt-1">
+                        Haz clic en una tarjeta para girarla y ver su explicación técnica, contexto gramatical y ejemplos prácticos.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+                        Total: 9 Expresiones
+                    </span>
+                    <button onclick="speakAllSummary()" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 border border-indigo-200">
+                        <i class="fa-solid fa-volume-high"></i> Escuchar Lista
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid of Flashcards -->
+            <div id="flashcards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript dynamic population -->
+            </div>
+        </section>
+
+        <!-- ==================== TAB 2: CUESTIONARIO DE PRÁCTICA ==================== -->
+        <section id="section-practice" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-dumbbell text-indigo-600"></i> Entrenador de Práctica Interactiva
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1">
+                            Responde las situaciones y completa las frases. Recibirás retroalimentación inmediata con explicaciones detalladas.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right">
+                            <span class="text-xs text-slate-500 font-semibold uppercase">Progreso</span>
+                            <p class="text-lg font-extrabold text-indigo-600" id="practice-progress-text">1 / 8</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
+                    <div id="practice-progress-bar" class="bg-indigo-600 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- Practice Card View -->
+            <div id="practice-card-wrapper" class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                <div class="p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center justify-between text-xs font-bold text-indigo-600 uppercase tracking-wider">
+                        <span id="practice-type-badge" class="bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full">
+                            Completar espacio en blanco
+                        </span>
+                        <span id="practice-verb-tag" class="text-slate-400">
+                            Situación de Negocios
+                        </span>
+                    </div>
+
+                    <!-- Question Prompt -->
+                    <div class="space-y-3">
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed" id="practice-question">
+                            <!-- Question text dynamically loaded -->
+                        </h3>
+                        <p id="practice-context-hint" class="text-sm text-slate-500 italic bg-amber-50/70 border-l-4 border-amber-400 p-3 rounded-r-lg">
+                            <!-- Context hint -->
+                        </p>
+                    </div>
+
+                    <!-- Options Container -->
+                    <div id="practice-options" class="grid grid-cols-1 gap-3 pt-2">
+                        <!-- Options buttons injected here -->
+                    </div>
+
+                    <!-- Instant Explanation Box (Hidden initially) -->
+                    <div id="practice-feedback" class="hidden p-4 rounded-xl border transition-all">
+                        <div class="flex items-start gap-3">
+                            <div id="practice-feedback-icon" class="mt-0.5 text-lg"></div>
+                            <div class="space-y-1">
+                                <h4 id="practice-feedback-title" class="font-bold text-sm"></h4>
+                                <p id="practice-feedback-text" class="text-sm text-slate-700"></p>
+                                <p id="practice-feedback-grammar" class="text-xs text-slate-500 font-medium pt-1 border-t border-slate-200/60 mt-2"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar Navigation -->
+                <div class="bg-slate-50 px-6 py-4 border-t border-slate-200 flex items-center justify-between">
+                    <button onclick="prevPracticeQuestion()" id="btn-practice-prev" class="px-4 py-2 text-sm font-semibold text-slate-600 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition">
+                        <i class="fa-solid fa-arrow-left mr-1.5"></i> Anterior
+                    </button>
+                    <button onclick="nextPracticeQuestion()" id="btn-practice-next" class="px-5 py-2 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition shadow-md shadow-indigo-200 flex items-center gap-1.5">
+                        <span>Siguiente</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 3: EVALUACIÓN Y RESULTADOS ==================== -->
+        <section id="section-test" class="tab-content hidden space-y-6">
+            <div id="test-intro-screen" class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center max-w-2xl mx-auto space-y-6">
+                <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold border border-indigo-200 shadow-inner">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-extrabold text-slate-900">Examen de Evaluación de Phrasal Verbs</h2>
+                    <p class="text-slate-600 text-sm max-w-lg mx-auto">
+                        Evalúa de forma rigurosa tu comprensión de los 9 phrasal verbs en contextos reales. Al finalizar recibirás una calificación global, un desglose de errores y recomendaciones de estudio.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left text-xs text-slate-600 space-y-2">
+                    <div class="flex items-center gap-2 font-bold text-slate-700">
+                        <i class="fa-solid fa-circle-info text-indigo-500"></i> Características del Examen:
+                    </div>
+                    <ul class="list-disc list-inside space-y-1 pl-1">
+                        <li>Consta de 9 preguntas de opción múltiple contextuales.</li>
+                        <li>Diferenciación estricta entre el doble significado de <strong>Put off</strong> (desanimar vs. posponer).</li>
+                        <li>Análisis de respuestas e informe de fortalezas/debilidades al terminar.</li>
+                    </ul>
+                </div>
+                <button onclick="startExam()" class="w-full sm:w-auto px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition shadow-lg shadow-indigo-200 text-base">
+                    <i class="fa-solid fa-play mr-2"></i> Iniciar Evaluación Ahora
+                </button>
+            </div>
+
+            <!-- Active Test Interface -->
+            <div id="test-active-screen" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Modo Evaluación</span>
+                        <h3 class="text-lg font-bold text-slate-800" id="test-question-counter">Pregunta 1 de 9</h3>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600">
+                        <i class="fa-regular fa-clock text-indigo-600"></i> Sin límite de tiempo
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-slate-200 space-y-6">
+                    <p class="text-lg font-bold text-slate-900 leading-snug" id="test-question-text">
+                        <!-- Exam question -->
+                    </p>
+
+                    <div id="test-options" class="space-y-3">
+                        <!-- Dynamically filled with options -->
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button onclick="prevTestQuestion()" id="btn-test-prev" class="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-100 transition disabled:opacity-40">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Anterior
+                    </button>
+                    <button onclick="nextTestQuestion()" id="btn-test-next" class="px-6 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition shadow-md shadow-indigo-200">
+                        Siguiente <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Test Results Screen -->
+            <div id="test-results-screen" class="hidden space-y-6">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center space-y-6">
+                    <div class="inline-flex items-center justify-center p-4 rounded-full bg-indigo-50 border-4 border-indigo-100 mb-2">
+                        <div id="score-ring" class="text-4xl font-black text-indigo-600">
+                            0%
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-slate-900" id="results-headline">Resultado del Examen</h2>
+                        <p class="text-slate-600 text-sm mt-1" id="results-subtext">Aquí tienes el desglose de tu desempeño.</p>
+                    </div>
+
+                    <!-- Personalized Feedback Card -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-left space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-user-graduate text-indigo-600"></i> Recomendación Diagnóstica Personalizada:
+                        </h4>
+                        <p id="personalized-advice" class="text-sm text-slate-700 leading-relaxed"></p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-4 pt-2">
+                        <button onclick="startExam()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition shadow-md">
+                            <i class="fa-solid fa-rotate-right mr-2"></i> Repetir Evaluación
+                        </button>
+                        <button onclick="switchTab('study')" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition border border-slate-300">
+                            <i class="fa-solid fa-book mr-2"></i> Repasar Tarjetas
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Detailed Answers Breakdown -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="text-lg font-bold text-slate-900 border-b pb-3">
+                        <i class="fa-solid fa-list-check text-indigo-600 mr-2"></i> Revisión Detallada de Respuestas
+                    </h3>
+                    <div id="answers-breakdown" class="space-y-4">
+                        <!-- Dynamic answer breakdown list -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 4: TEXTO ORIGINAL ==================== -->
+        <section id="section-reader" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-newspaper text-indigo-600"></i> Lectura Interactivamente Anotada
+                    </h2>
+                    <p class="text-sm text-slate-600 mt-1">
+                        Haz clic en los verbos resaltados para desplegar su significado directo y explicación situacional.
+                    </p>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-200 text-indigo-800 text-xs font-semibold px-3 py-2 rounded-xl flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-500 text-sm"></i>
+                    <span>Toca los términos en amarillo/azul para interactuar</span>
+                </div>
+            </div>
+
+            <!-- Story Body Card -->
+            <div class="bg-white p-6 sm:p-10 rounded-2xl shadow-md border border-slate-200 leading-relaxed text-slate-800 text-base sm:text-lg space-y-6">
+                <div class="border-b border-slate-200 pb-4">
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Artículo de Periódico</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">A COMPANY BOSS AT 16</h3>
+                </div>
+
+                <p class="text-slate-700">
+                    When David Eisman was just 16 and still at high school, he 
+                    <span onclick="highlightVerb('set up')" class="cursor-pointer bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded font-bold underline decoration-amber-500 decoration-2 transition">set up</span> 
+                    his own video game company. He always wanted to work in the video game industry.
+                </p>
+
+                <p class="text-slate-700">
+                    He 
+                    <span onclick="highlightVerb('fill in')" class="cursor-pointer bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded font-bold underline decoration-amber-500 decoration-2 transition">filled in</span> 
+                    applications for different companies to do an internship but they 
+                    <span onclick="highlightVerb('turn down')" class="cursor-pointer bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded font-bold underline decoration-amber-500 decoration-2 transition">turned him down</span> 
+                    because they said he had no experience. He 
+                    <span onclick="highlightVerb('keep at it')" class="cursor-pointer bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded font-bold underline decoration-amber-500 decoration-2 transition">kept at it</span> 
+                    but always faced the same problem. That didn't 
+                    <span onclick="highlightVerb('put off 1')" class="cursor-pointer bg-indigo-100 hover:bg-indigo-200 text-indigo-900 px-2 py-1 rounded font-bold underline decoration-indigo-500 decoration-2 transition">put him off</span>, 
+                    though.
+                </p>
+
+                <p class="text-slate-700">
+                    He decided to do something radical. He couldn't 
+                    <span onclick="highlightVerb('take over')" class="cursor-pointer bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded font-bold underline decoration-amber-500 decoration-2 transition">take over</span> 
+                    an existing company because he didn't have any money. So he started his own company by getting people to work for him for free, by offering to share the company's profits with them. He and his team began to work on an educational game.
+                </p>
+
+                <p class="text-slate-700">
+                    Being the boss of a company is hard work and it's difficult to 
+                    <span onclick="highlightVerb('keep up with')" class="cursor-pointer bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded font-bold underline decoration-amber-500 decoration-2 transition">keep up with</span> 
+                    all the elements of game production. But if you want to 
+                    <span onclick="highlightVerb('get ahead')" class="cursor-pointer bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded font-bold underline decoration-amber-500 decoration-2 transition">get ahead</span> 
+                    in the world of work, don't 
+                    <span onclick="highlightVerb('put off 2')" class="cursor-pointer bg-indigo-100 hover:bg-indigo-200 text-indigo-900 px-2 py-1 rounded font-bold underline decoration-indigo-500 decoration-2 transition">put things off</span> 
+                    until tomorrow if you can do them today!
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Interactive Reader Modal / Popover -->
+    <div id="reader-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-150">
+            <div class="flex items-center justify-between border-b pb-3">
+                <span class="text-xs font-extrabold uppercase text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md" id="modal-tag">Phrasal Verb</span>
+                <button onclick="closeReaderModal()" class="text-slate-400 hover:text-slate-600 text-lg p-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div>
+                <div class="flex items-center justify-between">
+                    <h3 id="modal-title" class="text-2xl font-extrabold text-slate-900"></h3>
+                    <button id="modal-audio-btn" class="w-9 h-9 rounded-full bg-indigo-100 hover:bg-indigo-200 text-indigo-700 flex items-center justify-center transition">
+                        <i class="fa-solid fa-volume-high text-sm"></i>
+                    </button>
+                </div>
+                <p id="modal-spanish" class="text-base font-bold text-indigo-600 mt-1"></p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-sm text-slate-700">
+                <p><strong><i class="fa-solid fa-compass text-amber-500"></i> Situación de Uso:</strong> <span id="modal-context"></span></p>
+                <p><strong><i class="fa-solid fa-quote-left text-indigo-400"></i> En el texto original:</strong> <span id="modal-quote" class="italic"></span></p>
+            </div>
+            <div class="pt-2">
+                <button onclick="closeReaderModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-sm transition">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="font-medium text-slate-300">A Company Boss at 16 &bull; Phrasal Verbs Interactive Learning Platform</p>
+            <p>© 2026 Diseñado para el aprendizaje activo de gramática en inglés.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // ================= DATA DEFINITION =================
+        const phrasalVerbs = [
+            {
+                id: "set-up",
+                verb: "Set up",
+                pastForm: "set up",
+                spanish: "Fundar / Crear una empresa u organización",
+                definition: "To start a business, organization, or system from scratch.",
+                situation: "Se utiliza cuando comienzas un negocio nuevo, creas un proyecto o inicias un club u organización.",
+                textQuote: "When David Eisman was just 16, he set up his own video game company.",
+                example: "She saved enough money to set up her own digital agency.",
+                grammar: "Transitivo / Separable (e.g., set up a company / set it up).",
+                type: "Empresarial / Emprendimiento"
+            },
+            {
+                id: "fill-in",
+                verb: "Fill in",
+                pastForm: "filled in",
+                spanish: "Rellenar / Completar formularios",
+                definition: "To complete a official form or document by writing information in the spaces provided.",
+                situation: "Se emplea al escribir tus datos personales o profesional en formularios de solicitud de empleo o documentos oficiales.",
+                textQuote: "He filled in applications for different companies to do an internship...",
+                example: "Please fill in this registration form before the interview.",
+                grammar: "Transitivo / Separable (e.g., fill in an application / fill it in).",
+                type: "Trámites / Documentación"
+            },
+            {
+                id: "turn-down",
+                verb: "Turn down",
+                pastForm: "turned down",
+                spanish: "Rechazar una solicitud / candidato / oferta",
+                definition: "To reject or refuse an offer, applicant, request, or proposal.",
+                situation: "Cuando una empresa o persona decide no aceptar a un candidato o rechaza una propuesta comercial.",
+                textQuote: "...they turned him down because they said he had no experience.",
+                example: "He was offered the job, but he turned it down due to the low salary.",
+                grammar: "Transitivo / Separable (e.g., turned him down / turned down the offer).",
+                type: "Negocios / Selección"
+            },
+            {
+                id: "keep-at-it",
+                verb: "Keep at it",
+                pastForm: "kept at it",
+                spanish: "Perseverar / Seguir intentándolo",
+                definition: "To continue working hard at something despite difficulties or obstacles.",
+                situation: "Se usa para describir la determinación y el esfuerzo constante ante la adversidad o metas complejas.",
+                textQuote: "He kept at it but always faced the same problem.",
+                example: "Learning programming is challenging, but if you keep at it, you will succeed.",
+                grammar: "Frase fija / Intransitiva (keep at [something/it]).",
+                type: "Actitud / Perseverancia"
+            },
+            {
+                id: "put-off-1",
+                verb: "Put off (Desanimar)",
+                pastForm: "put off",
+                spanish: "Desanimar / Disuadir / Quitar la motivación",
+                definition: "To cause someone to lose interest, enthusiasm, or confidence in doing something.",
+                situation: "Cuando una mala experiencia o la dificultad de un proceso te desmotiva a continuar.",
+                textQuote: "That didn't put him off, though.",
+                example: "The strict requirements put many young applicants off.",
+                grammar: "Transitivo / Separable (e.g., it put him off / put off potential investors).",
+                type: "Emoción / Motivación"
+            },
+            {
+                id: "take-over",
+                verb: "Take over",
+                pastForm: "took over",
+                spanish: "Tomar el control / Hacerse cargo de algo",
+                definition: "To get control of a company, business, or role by buying it or assuming management.",
+                situation: "Al asumir el mando de una empresa existente, comprar un negocio o encargarse de una tarea.",
+                textQuote: "He couldn't take over an existing company because he didn't have any money.",
+                example: "The tech giant plans to take over the artificial intelligence startup.",
+                grammar: "Transitivo / Separable (e.g., take over a company / take it over).",
+                type: "Gestión / Negocios"
+            },
+            {
+                id: "keep-up-with",
+                verb: "Keep up with",
+                pastForm: "kept up with",
+                spanish: "Mantenerse al día / Seguir el ritmo de trabajo",
+                definition: "To move, progress, or learn at the same rate as someone or something else.",
+                situation: "Cuando gestionas múltiples tareas sin quedarte atrás ante el ritmo rápido de trabajo o avance tecnológico.",
+                textQuote: "...it's difficult to keep up with all the elements of game production.",
+                example: "It's hard to keep up with all the latest updates in technology.",
+                grammar: "Tres palabras / Inseparable (keep up with [someone/something]).",
+                type: "Ritmo de Trabajo"
+            },
+            {
+                id: "get-ahead",
+                verb: "Get ahead",
+                pastForm: "got ahead",
+                spanish: "Progresar / Destacar / Avanzar profesionalmente",
+                definition: "To make progress in one's career or life; to achieve financial or social success.",
+                situation: "Tener éxito laboral, ascender de puesto o destacar sobre la competencia en el trabajo.",
+                textQuote: "But if you want to get ahead in the world of work...",
+                example: "Working hard and learning new skills helps you get ahead in your career.",
+                grammar: "Intransitivo (get ahead in [field/career]).",
+                type: "Carrera Profesional"
+            },
+            {
+                id: "put-off-2",
+                verb: "Put off (Posponer)",
+                pastForm: "put off",
+                spanish: "Posponer / Aplazar / Procrastinar",
+                definition: "To delay doing something until a later time or date; postpone.",
+                situation: "Dejar una tarea o compromiso para más tarde o para otro día por desorganización o pereza.",
+                textQuote: "...don't put things off until tomorrow if you can do them today!",
+                example: "You shouldn't put off filing your tax forms until the deadline.",
+                grammar: "Transitivo / Separable (e.g., put off a meeting / put it off).",
+                type: "Gestión del Tiempo"
+            }
+        ];
+
+        // ================= PRACTICE QUESTIONS DATA =================
+        const practiceQuestions = [
+            {
+                question: "David wanted to start his own business, so he decided to _______ a video game company.",
+                options: ["set up", "fill in", "take over", "get ahead"],
+                correct: 0,
+                hint: "Fundar o iniciar un negocio desde cero.",
+                explanation: "'Set up' significa fundar o establecer una empresa u organización."
+            },
+            {
+                question: "To apply for the internship, he had to _______ several detailed forms.",
+                options: ["turn down", "fill in", "keep at it", "put off"],
+                correct: 1,
+                hint: "Escribir la información requerida en una solicitud.",
+                explanation: "'Fill in' se usa específicamente para rellenar formularios o solicitudes."
+            },
+            {
+                question: "The companies rejected his application; they _______ him _______ because he lacked experience.",
+                options: ["put... off", "turned... down", "set... up", "took... over"],
+                correct: 1,
+                hint: "Rechazar a un candidato laboral.",
+                explanation: "'Turn down' significa rechazar una oferta, solicitud o candidato."
+            },
+            {
+                question: "Although he faced rejection, he didn't give up. He decided to _______ until he succeeded.",
+                options: ["keep at it", "get ahead", "take over", "put off"],
+                correct: 0,
+                hint: "Perseverar e insistir a pesar de los obstáculos.",
+                explanation: "'Keep at it' es una expresión para decir perseverar o continuar esforzándose."
+            },
+            {
+                question: "Rejection was discouraging, but it didn't _______ him _______ from trying again.",
+                options: ["fill... in", "put... off", "get... ahead", "keep... up with"],
+                correct: 1,
+                hint: "Sentido 1 de Put off: Desanimar o quitar la motivación a alguien.",
+                explanation: "En este contexto, 'put off' significa desanimar o disuadir a una persona."
+            },
+            {
+                question: "He didn't have enough money to buy or _______ an established company.",
+                options: ["take over", "set up", "turn down", "fill in"],
+                correct: 0,
+                hint: "Tomar el control o adquirir una compañía existente.",
+                explanation: "'Take over' significa tomar el control o hacerse cargo de una empresa."
+            },
+            {
+                question: "With so many responsibilities, it was demanding to _______ all game development updates.",
+                options: ["keep up with", "get ahead", "put off", "turn down"],
+                correct: 0,
+                hint: "Mantenerse al día o seguir el ritmo de trabajo.",
+                explanation: "'Keep up with' significa seguir el ritmo o mantenerse al día con tareas cambiantes."
+            },
+            {
+                question: "If you want to succeed and _______ in the competitive business world, avoid procrastination.",
+                options: ["get ahead", "fill in", "keep at it", "take over"],
+                correct: 0,
+                hint: "Progresar y destacar en el mundo laboral.",
+                explanation: "'Get ahead' significa progresar o prosperar profesionalmente."
+            }
+        ];
+
+        // ================= TEST EVALUATION QUESTIONS =================
+        const testQuestions = [
+            {
+                id: 1,
+                verbTarget: "set-up",
+                scenario: "Un joven emprendedor inicia un nuevo estudio de diseño gráfico desde cero en su garaje.",
+                question: "Which phrasal verb describes starting this new business?",
+                options: ["Take over", "Set up", "Fill in", "Get ahead"],
+                correctIndex: 1,
+                explanation: "'Set up' es el phrasal verb exacto para fundar o inaugurar una empresa u organización."
+            },
+            {
+                id: 2,
+                verbTarget: "fill-in",
+                scenario: "Estás frente a un formulario oficial de inmigración o de solicitud de trabajo.",
+                question: "What action are you asked to do with the document?",
+                options: ["Fill in", "Turn down", "Put off", "Keep up with"],
+                correctIndex: 0,
+                explanation: "'Fill in' significa completar o rellenar un documento con tus datos."
+            },
+            {
+                id: 3,
+                verbTarget: "turn-down",
+                scenario: "Una empresa recibe una propuesta de contrato pero decide no aceptarla por el alto costo.",
+                question: "The board of directors decided to _______ the offer.",
+                options: ["turn down", "set up", "keep at it", "take over"],
+                correctIndex: 0,
+                explanation: "'Turn down' se refiere al acto de rechazar una propuesta, oferta o solicitud."
+            },
+            {
+                id: 4,
+                verbTarget: "keep-at-it",
+                scenario: "Estudias inglés 30 minutos todos los días sin rendirte aunque la gramática sea compleja.",
+                question: "You face difficulties, but you decide to _______.",
+                options: ["put it off", "keep at it", "turn it down", "fill it in"],
+                correctIndex: 1,
+                explanation: "'Keep at it' significa mantener la constancia y perseverar en una tarea ardua."
+            },
+            {
+                id: 5,
+                verbTarget: "put-off-1",
+                scenario: "La mala atención al cliente de un restaurante causó que un comensal no quiera volver jamás.",
+                question: "The rude service _______ the customer _______.",
+                options: ["put... off (desanimó)", "set... up (fundó)", "got... ahead (progresó)", "filled... in (rellenó)"],
+                correctIndex: 0,
+                explanation: "'Put off' (en su significado de desanimar/disuadir) describe la pérdida de interés debido a una mala experiencia."
+            },
+            {
+                id: 6,
+                verbTarget: "take-over",
+                scenario: "Una corporación multinacional adquiere el 100% de las acciones de una pequeña empresa emergente.",
+                question: "The corporation wants to _______ the small startup.",
+                options: ["keep up with", "take over", "turn down", "put off"],
+                correctIndex: 1,
+                explanation: "'Take over' se utiliza cuando una entidad asume el mando o adquiere el control de otra."
+            },
+            {
+                id: 7,
+                verbTarget: "keep-up-with",
+                scenario: "El ritmo de producción de software es vertiginoso y debes estudiar continuamente para no quedarte atrás.",
+                question: "It is necessary to _______ modern industry trends.",
+                options: ["keep up with", "turn down", "fill in", "set up"],
+                correctIndex: 0,
+                explanation: "'Keep up with' indica mantenerse alineado al mismo ritmo que los cambios o la carga de trabajo."
+            },
+            {
+                id: 8,
+                verbTarget: "get-ahead",
+                scenario: "Trabajas horas extras y estudias un máster para lograr una promoción a director de departamento.",
+                question: "You are doing your best to _______ in your professional career.",
+                options: ["get ahead", "put off", "turn down", "fill in"],
+                correctIndex: 0,
+                explanation: "'Get ahead' significa avanzar, prosperar y lograr el éxito profesional."
+            },
+            {
+                id: 9,
+                verbTarget: "put-off-2",
+                scenario: "Tienes un informe pendiente para hoy, pero decides posponerlo hasta el viernes que viene.",
+                question: "You shouldn't _______ important tasks until the last minute.",
+                options: ["set up", "put off (posponer)", "keep at it", "take over"],
+                correctIndex: 1,
+                explanation: "'Put off' (en su significado de posponer/procrastinar) implica aplazar una obligación para más adelante."
+            }
+        ];
+
+        // ================= STATE MANAGEMENT =================
+        let currentPracticeIndex = 0;
+        let practiceAnswers = new Array(practiceQuestions.length).fill(null);
+        
+        let currentTestIndex = 0;
+        let testAnswers = new Array(testQuestions.length).fill(null);
+
+        // Speech Synthesis Helper
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function speakAllSummary() {
+            const allVerbsText = phrasalVerbs.map(v => v.verb).join(", ");
+            speakText("Here are the phrasal verbs: " + allVerbsText);
+        }
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md', 'active');
+                btn.classList.add('text-indigo-200', 'hover:bg-indigo-800/50');
+            });
+            document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('hidden'));
+
+            const selectedBtn = document.getElementById(`tab-${tabId}`);
+            const selectedSec = document.getElementById(`section-${tabId}`);
+            
+            if (selectedBtn && selectedSec) {
+                selectedBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'active');
+                selectedBtn.classList.remove('text-indigo-200', 'hover:bg-indigo-800/50');
+                selectedSec.classList.remove('hidden');
+            }
+        }
+
+        // ================= FLASHCARDS GENERATION =================
+        function renderFlashcards() {
+            const container = document.getElementById('flashcards-container');
+            container.innerHTML = '';
+
+            phrasalVerbs.forEach((item, index) => {
+                const cardHTML = `
+                    <div class="perspective-1000 h-80 cursor-pointer group" onclick="toggleCardFlip(this)">
+                        <div class="card-inner relative w-full h-full duration-500 transform-style-3d shadow-md hover:shadow-xl rounded-2xl border border-slate-200 transition-all">
+                            
+                            <!-- FRONT OF CARD -->
+                            <div class="absolute inset-0 w-full h-full bg-white rounded-2xl p-6 flex flex-col justify-between backface-hidden border-2 border-indigo-50/50">
+                                <div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+                                            ${item.type}
+                                        </span>
+                                        <button onclick="event.stopPropagation(); speakText('${item.verb}')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-indigo-100 text-slate-600 hover:text-indigo-600 flex items-center justify-center transition" title="Escuchar Pronunciación">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="mt-6">
+                                        <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                                            ${item.verb}
+                                        </h3>
+                                        <p class="text-xs font-semibold text-slate-400 mt-1">Pasado: <span class="text-slate-600">${item.pastForm}</span></p>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-t border-slate-100">
+                                        <p class="text-base font-bold text-indigo-700 leading-snug">
+                                            ${item.spanish}
+                                        </p>
+                                        <p class="text-xs text-slate-500 mt-2 line-clamp-2">
+                                            ${item.definition}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-slate-400 font-semibold pt-3 border-t border-slate-100">
+                                    <span>Haz clic para voltear</span>
+                                    <i class="fa-solid fa-rotate text-indigo-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD -->
+                            <div class="absolute inset-0 w-full h-full bg-indigo-900 text-white rounded-2xl p-6 flex flex-col justify-between backface-hidden rotate-y-180">
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-bold text-amber-300 uppercase tracking-wider">Detalles & Contexto</span>
+                                        <button onclick="event.stopPropagation(); speakText('${item.example.replace(/'/g, "\\'")}')" class="w-8 h-8 rounded-full bg-indigo-800 hover:bg-indigo-700 text-indigo-200 flex items-center justify-center transition">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-indigo-300 uppercase">Situación de Uso</h4>
+                                        <p class="text-xs text-indigo-100 mt-0.5 leading-relaxed">${item.situation}</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-amber-300 uppercase">Ejemplo Práctico</h4>
+                                        <p class="text-xs italic text-white mt-0.5 bg-indigo-950/60 p-2.5 rounded-lg border border-indigo-700/60">"${item.example}"</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-indigo-300 uppercase">Nota Gramatical</h4>
+                                        <p class="text-[11px] text-indigo-200">${item.grammar}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right text-xs text-indigo-300 font-semibold">
+                                    <i class="fa-solid fa-undo mr-1"></i> Volver al frente
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        function toggleCardFlip(cardElement) {
+            const inner = cardElement.querySelector('.card-inner');
+            inner.classList.toggle('flipped');
+        }
+
+        // ================= PRACTICE LOGIC =================
+        function loadPracticeQuestion() {
+            const q = practiceQuestions[currentPracticeIndex];
+            document.getElementById('practice-progress-text').innerText = `${currentPracticeIndex + 1} / ${practiceQuestions.length}`;
+            document.getElementById('practice-progress-bar').style.width = `${((currentPracticeIndex + 1) / practiceQuestions.length) * 100}%`;
+            
+            document.getElementById('practice-question').innerText = q.question;
+            document.getElementById('practice-context-hint').innerHTML = `<i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> <strong>Pista de contexto:</strong> ${q.hint}`;
+
+            const optionsContainer = document.getElementById('practice-options');
+            optionsContainer.innerHTML = '';
+
+            const selectedAns = practiceAnswers[currentPracticeIndex];
+
+            q.options.forEach((opt, idx) => {
+                let btnStyle = "bg-slate-50 hover:bg-indigo-50/60 border-slate-200 text-slate-800";
+                let iconHTML = `<span class="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center text-xs font-bold text-slate-500 mr-3">${String.fromCharCode(65 + idx)}</span>`;
+
+                if (selectedAns !== null) {
+                    if (idx === q.correct) {
+                        btnStyle = "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold";
+                        iconHTML = `<i class="fa-solid fa-circle-check text-emerald-600 text-lg mr-3"></i>`;
+                    } else if (idx === selectedAns && selectedAns !== q.correct) {
+                        btnStyle = "bg-rose-50 border-rose-300 text-rose-900 font-medium";
+                        iconHTML = `<i class="fa-solid fa-circle-xmark text-rose-500 text-lg mr-3"></i>`;
+                    }
+                }
+
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-xl border-2 transition-all flex items-center ${btnStyle}`;
+                btn.disabled = selectedAns !== null;
+                btn.onclick = () => selectPracticeAnswer(idx);
+                btn.innerHTML = `${iconHTML} <span class="text-sm font-semibold">${opt}</span>`;
+                optionsContainer.appendChild(btn);
+            });
+
+            // Feedback panel
+            const feedbackBox = document.getElementById('practice-feedback');
+            if (selectedAns !== null) {
+                feedbackBox.classList.remove('hidden');
+                const isCorrect = selectedAns === q.correct;
+
+                if (isCorrect) {
+                    feedbackBox.className = "p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-900";
+                    document.getElementById('practice-feedback-icon').innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                    document.getElementById('practice-feedback-title').innerText = "¡Excelente! Respuesta Correcta";
+                } else {
+                    feedbackBox.className = "p-4 rounded-xl border bg-rose-50 border-rose-200 text-rose-900";
+                    document.getElementById('practice-feedback-icon').innerHTML = '<i class="fa-solid fa-circle-exclamation text-rose-600"></i>';
+                    document.getElementById('practice-feedback-title').innerText = "Respuesta Incorrecta";
+                }
+
+                document.getElementById('practice-feedback-text').innerText = q.explanation;
+                document.getElementById('practice-feedback-grammar').innerText = `Opción correcta: ${q.options[q.correct]}`;
+            } else {
+                feedbackBox.classList.add('hidden');
+            }
+
+            // Buttons state
+            document.getElementById('btn-practice-prev').disabled = currentPracticeIndex === 0;
+            const nextBtn = document.getElementById('btn-practice-next');
+            if (currentPracticeIndex === practiceQuestions.length - 1) {
+                nextBtn.innerHTML = `<span>Finalizar Práctica</span> <i class="fa-solid fa-check"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>Siguiente</span> <i class="fa-solid fa-arrow-right"></i>`;
+            }
+        }
+
+        function selectPracticeAnswer(index) {
+            practiceAnswers[currentPracticeIndex] = index;
+            loadPracticeQuestion();
+        }
+
+        function prevPracticeQuestion() {
+            if (currentPracticeIndex > 0) {
+                currentPracticeIndex--;
+                loadPracticeQuestion();
+            }
+        }
+
+        function nextPracticeQuestion() {
+            if (currentPracticeIndex < practiceQuestions.length - 1) {
+                currentPracticeIndex++;
+                loadPracticeQuestion();
+            } else {
+                // Practice finished, redirect or show message
+                switchTab('test');
+            }
+        }
+
+        // ================= TEST EVALUATION LOGIC =================
+        function startExam() {
+            currentTestIndex = 0;
+            testAnswers = new Array(testQuestions.length).fill(null);
+            
+            document.getElementById('test-intro-screen').classList.add('hidden');
+            document.getElementById('test-results-screen').classList.add('hidden');
+            document.getElementById('test-active-screen').classList.remove('hidden');
+
+            loadTestQuestion();
+        }
+
+        function loadTestQuestion() {
+            const q = testQuestions[currentTestIndex];
+            document.getElementById('test-question-counter').innerText = `Pregunta ${currentTestIndex + 1} de ${testQuestions.length}`;
+            
+            document.getElementById('test-question-text').innerHTML = `
+                <span class="block text-xs font-bold text-slate-500 uppercase mb-1">Escenario Contextual:</span>
+                <span class="italic text-slate-700 bg-slate-100 p-3 rounded-lg block mb-3 border-l-4 border-indigo-500 text-sm">"${q.scenario}"</span>
+                <span>${q.question}</span>
+            `;
+
+            const optionsBox = document.getElementById('test-options');
+            optionsBox.innerHTML = '';
+
+            const selectedAns = testAnswers[currentTestIndex];
+
+            q.options.forEach((opt, idx) => {
+                let isSelected = selectedAns === idx;
+                let btnClass = isSelected 
+                    ? "bg-indigo-600 text-white border-indigo-600 font-bold shadow-md" 
+                    : "bg-white text-slate-700 border-slate-200 hover:bg-indigo-50/50 font-medium";
+
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-xl border-2 transition-all flex items-center justify-between ${btnClass}`;
+                btn.onclick = () => {
+                    testAnswers[currentTestIndex] = idx;
+                    loadTestQuestion();
+                };
+                btn.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="w-7 h-7 rounded-full flex items-center justify-center border text-xs mr-3 ${isSelected ? 'bg-white text-indigo-600 border-white font-extrabold' : 'border-slate-300 text-slate-500'}">
+                            ${String.fromCharCode(65 + idx)}
+                        </span>
+                        <span class="text-sm">${opt}</span>
+                    </div>
+                    ${isSelected ? '<i class="fa-solid fa-circle-check text-white"></i>' : ''}
+                `;
+                optionsBox.appendChild(btn);
+            });
+
+            document.getElementById('btn-test-prev').disabled = currentTestIndex === 0;
+            const nextBtn = document.getElementById('btn-test-next');
+            if (currentTestIndex === testQuestions.length - 1) {
+                nextBtn.innerHTML = `Entregar Examen <i class="fa-solid fa-paper-plane ml-1"></i>`;
+                nextBtn.className = "px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition shadow-md shadow-emerald-200";
+            } else {
+                nextBtn.innerHTML = `Siguiente <i class="fa-solid fa-chevron-right ml-1"></i>`;
+                nextBtn.className = "px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition shadow-md shadow-indigo-200";
+            }
+        }
+
+        function prevTestQuestion() {
+            if (currentTestIndex > 0) {
+                currentTestIndex--;
+                loadTestQuestion();
+            }
+        }
+
+        function nextTestQuestion() {
+            if (testAnswers[currentTestIndex] === null) {
+                // User hasn't selected an answer, alert gracefully with UI
+                const optsBox = document.getElementById('test-options');
+                optsBox.classList.add('animate-pulse');
+                setTimeout(() => optsBox.classList.remove('animate-pulse'), 1000);
+                return;
+            }
+
+            if (currentTestIndex < testQuestions.length - 1) {
+                currentTestIndex++;
+                loadTestQuestion();
+            } else {
+                calculateResults();
+            }
+        }
+
+        function calculateResults() {
+            document.getElementById('test-active-screen').classList.add('hidden');
+            document.getElementById('test-results-screen').classList.remove('hidden');
+
+            let score = 0;
+            const breakdownContainer = document.getElementById('answers-breakdown');
+            breakdownContainer.innerHTML = '';
+
+            let wrongVerbs = [];
+
+            testQuestions.forEach((q, idx) => {
+                const userAns = testAnswers[idx];
+                const isCorrect = userAns === q.correctIndex;
+                if (isCorrect) score++;
+                else wrongVerbs.push(q.verbTarget);
+
+                const itemHTML = `
+                    <div class="p-4 rounded-xl border ${isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-rose-50/50 border-rose-200'} space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
+                                Pregunta ${idx + 1}: ${q.verbTarget}
+                            </span>
+                            <span class="text-xs px-2.5 py-1 rounded-full font-bold ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                                ${isCorrect ? '<i class="fa-solid fa-check mr-1"></i> Correcta' : '<i class="fa-solid fa-xmark mr-1"></i> Incorrecta'}
+                            </span>
+                        </div>
+                        <p class="text-sm font-bold text-slate-800">${q.question}</p>
+                        <div class="text-xs space-y-1 text-slate-600 pt-1">
+                            <p><strong>Tu respuesta:</strong> ${userAns !== null ? q.options[userAns] : 'Sin responder'}</p>
+                            ${!isCorrect ? `<p class="text-emerald-700"><strong>Respuesta Correcta:</strong> ${q.options[q.correctIndex]}</p>` : ''}
+                            <p class="italic bg-white/80 p-2 rounded border border-slate-200 mt-2 text-slate-700">${q.explanation}</p>
+                        </div>
+                    </div>
+                `;
+                breakdownContainer.innerHTML += itemHTML;
+            });
+
+            const percentage = Math.round((score / testQuestions.length) * 100);
+            document.getElementById('score-ring').innerText = `${percentage}%`;
+
+            const headline = document.getElementById('results-headline');
+            const advice = document.getElementById('personalized-advice');
+
+            if (percentage === 100) {
+                headline.innerText = "¡Dominio Perfecto! 🌟";
+                advice.innerHTML = "¡Felicidades! Has demostrado un conocimiento impecable de los 9 phrasal verbs, comprendiendo perfectamente los matices contextuales y el doble significado de <strong>Put off</strong> (desanimar vs. posponer). ¡Estás listo para aplicarlos en entornos laborales reales!";
+            } else if (percentage >= 75) {
+                headline.innerText = "¡Excelente Resultado! 🚀";
+                advice.innerHTML = `Has obtenido una calificación destacada. Para alcanzar el 100%, te recomendamos repasar los conceptos asociados a: <strong>${wrongVerbs.join(', ')}</strong> en la sección de Tarjetas.`;
+            } else if (percentage >= 50) {
+                headline.innerText = "Buen Intento 👍";
+                advice.innerHTML = `Tienes una buena base, pero aún existen confusiones en situaciones específicas. Concéntrate en practicar las diferencias de <strong>Put off</strong> y repasa la sección de tarjetas interactivas antes de volver a evaluarte.`;
+            } else {
+                headline.innerText = "Necesitas Más Repaso 📚";
+                advice.innerHTML = "Te recomendamos revisar detenidamente cada tarjeta de estudio y realizar el módulo de práctica interactiva antes de intentar el examen nuevamente. ¡La constancia es la clave (Keep at it)!";
+            }
+        }
+
+        // ================= READER MODAL INTERACTION =================
+        function highlightVerb(verbKey) {
+            let data = null;
+            if (verbKey === 'put off 1') {
+                data = phrasalVerbs.find(v => v.id === 'put-off-1');
+            } else if (verbKey === 'put off 2') {
+                data = phrasalVerbs.find(v => v.id === 'put-off-2');
+            } else {
+                data = phrasalVerbs.find(v => v.verb.toLowerCase() === verbKey.toLowerCase());
+            }
+
+            if (!data) return;
+
+            document.getElementById('modal-tag').innerText = data.type;
+            document.getElementById('modal-title').innerText = data.verb;
+            document.getElementById('modal-spanish').innerText = data.spanish;
+            document.getElementById('modal-context').innerText = data.situation;
+            document.getElementById('modal-quote').innerText = `"${data.textQuote}"`;
+
+            const audioBtn = document.getElementById('modal-audio-btn');
+            audioBtn.onclick = () => speakText(data.verb);
+
+            document.getElementById('reader-modal').classList.remove('hidden');
+        }
+
+        function closeReaderModal() {
+            document.getElementById('reader-modal').classList.add('hidden');
+        }
+
+        // Close modal on escape or background click
+        window.onclick = function(event) {
+            const modal = document.getElementById('reader-modal');
+            if (event.target === modal) {
+                closeReaderModal();
+            }
+        };
+
+        // Initialize App
+        window.onload = function() {
+            renderFlashcards();
+            loadPracticeQuestion();
+        };
+    </script>
+</body>
+</html>
