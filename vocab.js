@@ -245,7 +245,7 @@
 
     const MODES = {
         study:      { label: 'Estudiar', icon: 'fa-book', desc: 'Repasa cada expresión con su definición en inglés, su significado y frases de ejemplo.' },
-        gap:        { label: 'Completa la frase', icon: 'fa-pen', desc: 'Escribe la expresión que falta en la forma correcta (tiempo verbal, persona, plural...). El hueco puede tener varias palabras.' },
+        gap:        { label: 'Completa la frase', icon: 'fa-pen', desc: 'Escribe la expresión que falta en la forma correcta (tiempo verbal, persona, plural...).' },
         transform:  { label: 'Transforma la frase', icon: 'fa-arrows-rotate', desc: 'Completa la segunda frase para que signifique lo mismo que la primera, usando una expresión del vocabulario.' },
         definition: { label: 'Definiciones', icon: 'fa-book-open-reader', desc: 'Lee la definición en inglés y escribe la palabra o expresión.' },
         mixed:      { label: 'Examen mixto', icon: 'fa-shuffle', desc: 'Mezcla de frases para completar, transformaciones y definiciones.' }
@@ -354,12 +354,10 @@
         const words = ans.split(/\s+/).length;
         const parts = [];
         if (level >= 1) {
-            parts.push(q.type === 'gap'
-                ? `Tiene <strong>${words}</strong> palabra${words === 1 ? '' : 's'}.`
-                : `Significado: <strong>${esc(q.item.es)}</strong>.`);
+            parts.push(`Significado: <strong>${esc(q.item.es)}</strong>.`);
         }
         if (level >= 2) {
-            if (q.type !== 'gap') parts.push(`Tiene <strong>${words}</strong> palabra${words === 1 ? '' : 's'}.`);
+            parts.push(`Tiene <strong>${words}</strong> palabra${words === 1 ? '' : 's'}.`);
             const pattern = ans.split(/\s+/).map(w => w[0] + w.slice(1).replace(/[a-zA-Z]/g, '_')).join('  ');
             parts.push(`Empieza así: <strong class="font-mono tracking-wider">${esc(pattern)}</strong>`);
         }
@@ -471,17 +469,14 @@
         let badge = '', prompt = '';
         if (cur.type === 'gap') {
             badge = 'Completa la frase';
-            prompt = `<p class="text-xl sm:text-2xl font-bold text-slate-800 leading-relaxed">${esc(cur.before)}${gapBox}${esc(cur.after)}</p>
-                      <p class="text-sm text-slate-500">(= <span class="font-semibold text-indigo-700">${esc(item.es)}</span>) — escríbelo en la forma correcta.</p>`;
+            prompt = `<p class="text-xl sm:text-2xl font-bold text-slate-800 leading-relaxed">${esc(cur.before)}${gapBox}${esc(cur.after)}</p>`;
         } else if (cur.type === 'transform') {
             badge = 'Transforma la frase';
             prompt = `<p class="text-base sm:text-lg text-slate-600 bg-slate-50 border-l-4 border-slate-300 p-3 rounded-r-lg">${esc(cur.original)}</p>
-                      <p class="text-xl sm:text-2xl font-bold text-slate-800 leading-relaxed">${esc(cur.before)}${gapBox}${esc(cur.after)}</p>
-                      <p class="text-sm text-slate-500">Completa la segunda frase para que signifique lo mismo, usando una expresión del vocabulario.</p>`;
+                      <p class="text-xl sm:text-2xl font-bold text-slate-800 leading-relaxed">${esc(cur.before)}${gapBox}${esc(cur.after)}</p>`;
         } else {
             badge = 'Definición';
-            prompt = `<p class="text-xl sm:text-2xl font-bold text-slate-800 leading-relaxed">"${esc(item.def)}"</p>
-                      <p class="text-sm text-slate-500">¿Qué palabra o expresión es?</p>`;
+            prompt = `<p class="text-xl sm:text-2xl font-bold text-slate-800 leading-relaxed">"${esc(item.def)}"</p>`;
         }
 
         let body = '';
