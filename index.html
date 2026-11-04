@@ -73,6 +73,9 @@
                     <button onclick="switchTab('reader')" id="tab-reader" class="tab-btn px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
                         <i class="fa-solid fa-book-open"></i> <span>4. Texto Original</span>
                     </button>
+                    <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-spell-check"></i> <span>5. Vocabulario</span>
+                    </button>
                 </nav>
             </div>
         </div>
@@ -350,6 +353,43 @@
                     <span onclick="highlightVerb('put off 2')" class="cursor-pointer bg-indigo-100 hover:bg-indigo-200 text-indigo-900 px-2 py-1 rounded font-bold underline decoration-indigo-500 decoration-2 transition">put things off</span> 
                     until tomorrow if you can do them today!
                 </p>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 5: VOCABULARIO (3º ESO) ==================== -->
+        <section id="section-vocab" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-spell-check text-indigo-600"></i> Vocabulario: Work &amp; Working Life
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1" id="vocab-mode-desc"></p>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span id="vocab-count" class="text-xs font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">Total: 44 expresiones</span>
+                        <span class="text-xs font-semibold text-rose-700 bg-rose-50 px-3 py-1.5 rounded-lg border border-rose-200" title="Expresiones falladas pendientes de repasar">
+                            <i class="fa-solid fa-rotate-left"></i> Fallos: <span id="vocab-mistakes-count">0</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button data-vocab-unit="all">Todo</button>
+                    <button data-vocab-unit="u05">05 · Work conditions and responsibilities</button>
+                    <button data-vocab-unit="u06">06 · Working life, hours and pay</button>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-3 border-t border-slate-100">
+                    <button data-vocab-mode="study"><i class="fa-solid fa-book"></i> Estudiar</button>
+                    <button data-vocab-mode="en_es"><i class="fa-solid fa-language"></i> Test EN → ES</button>
+                    <button data-vocab-mode="es_en"><i class="fa-solid fa-arrow-right-arrow-left"></i> Test ES → EN</button>
+                    <button data-vocab-mode="gap"><i class="fa-solid fa-puzzle-piece"></i> Completa la frase</button>
+                    <button data-vocab-mode="write"><i class="fa-solid fa-keyboard"></i> Escríbelo</button>
+                    <button data-vocab-mode="match"><i class="fa-solid fa-link"></i> Emparejar</button>
+                </div>
+            </div>
+
+            <div id="vocab-root" class="space-y-6">
+                <!-- Contenido generado por vocab.js -->
             </div>
         </section>
     </main>
@@ -1087,5 +1127,7 @@
             renderFlashcards();
         };
     </script>
+    <!-- Sección de Vocabulario -->
+    <script src="vocab.js"></script>
 </body>
 </html>
